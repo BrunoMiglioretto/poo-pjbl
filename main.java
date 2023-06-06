@@ -1,11 +1,7 @@
-import app.test.*;
+import app.views.JanelaPrincipal;
 
 public class main {
-
     public static void main(String[] args) {
-        ProgramaTcc programa = new ProgramaTcc();
-        programa.setDefaultCloseOperation(ProgramaTcc.EXIT_ON_CLOSE);
-        programa.setSize(1024, 768);
-        programa.setVisible(true);
+        programa p = new programa();
     }
 }

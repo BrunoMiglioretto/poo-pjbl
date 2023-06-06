@@ -7,6 +7,10 @@ import app.models.Produto;
 public class ProdutoController {
     private ArrayList<Produto> produtos;
 
+    public ProdutoController() {
+        produtos = new ArrayList<Produto>(); 
+    }
+
     private int gerar_proximo_id() {
         int maior_id = 0;
         for (Produto produto: produtos) {
@@ -17,8 +21,8 @@ public class ProdutoController {
         return maior_id + 1;
     }
    
-    public Produto cadastrar_produto(double quantidade, double preco, String marca) {
-        Produto produto = new Produto(gerar_proximo_id(), quantidade, preco, marca);
+    public Produto cadastrar_produto(String nome, double quantidade, double preco, String marca) {
+        Produto produto = new Produto(gerar_proximo_id(), nome, quantidade, preco, marca);
 
         produtos.add(produto);
 
@@ -39,5 +43,9 @@ public class ProdutoController {
         }
 
         return produto_removido;
+    }
+
+    public ArrayList<Produto> get_produtos() {
+        return produtos;
     }
 }
