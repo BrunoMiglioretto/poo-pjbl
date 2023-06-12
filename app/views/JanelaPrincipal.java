@@ -23,11 +23,12 @@ import app.views.tab.ProdutoTab;
 public class JanelaPrincipal extends Janela {
 	private ProdutoController produtoController;	
 	private ProdutoTab produtoTab;
+	private ProdutoExcluidoTab produtoExcluidoTab;
 
 	public JanelaPrincipal(ProdutoController produtoController) {
-		super("Sistema de Caixa");
+		super("Sistema de gerenciamento de estoque");
 		this.produtoController = produtoController;
-				
+		
 		criarTabs();	
 		criarMenu();
 	}
@@ -47,7 +48,7 @@ public class JanelaPrincipal extends Janela {
 		};
 		novoProdutoMenu.addActionListener(abrirJanelaNovoProduto);
 
-		JFrame janelaExcluirProduto = new JanelaExcluirProduto(produtoController, produtoTab, produtoTab);
+		JFrame janelaExcluirProduto = new JanelaExcluirProduto(produtoController, produtoTab, produtoExcluidoTab);
 		JMenuItem excluirAction = new JMenuItem("Excluir");
 		ActionListener abrirJanelaExcluirProduto = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -67,7 +68,8 @@ public class JanelaPrincipal extends Janela {
 		
 		produtoTab = construirTabProdutos();
 		tabbedPane.addTab("Produtos", produtoTab);
-		tabbedPane.addTab("Produtos excluidos", construirTabProdutosExcluidos());
+		produtoExcluidoTab = construirTabProdutosExcluidos();
+		tabbedPane.addTab("Produtos excluidos", produtoExcluidoTab);
 
 		add(tabbedPane);
 		
@@ -80,7 +82,7 @@ public class JanelaPrincipal extends Janela {
 		return new ProdutoTab(tabela, modelo, produtoController);
 	}
 
-	protected ProdutoTab construirTabProdutosExcluidos() {
+	protected ProdutoExcluidoTab construirTabProdutosExcluidos() {
 		DefaultTableModel modelo = new DefaultTableModel();
         JTable tabela = new JTable(modelo);
 		return new ProdutoExcluidoTab(tabela, modelo, produtoController);

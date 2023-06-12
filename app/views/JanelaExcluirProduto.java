@@ -6,14 +6,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import app.contollers.ProdutoController;
+import app.views.tab.ProdutoExcluidoTab;
 import app.views.tab.ProdutoTab;
 
 public class JanelaExcluirProduto extends Janela {
     ProdutoController produtoController;    
     ProdutoTab produtoTab;
-    ProdutoTab produtoExcluidoTab;
+    ProdutoExcluidoTab produtoExcluidoTab;
 
-    public JanelaExcluirProduto(ProdutoController produtoController, ProdutoTab produtoTab, ProdutoTab produtoExcluidoTab) {
+    public JanelaExcluirProduto(ProdutoController produtoController, ProdutoTab produtoTab, ProdutoExcluidoTab produtoExcluidoTab) {
         super("Excluir produto");
         this.produtoController = produtoController; 
         this.produtoTab = produtoTab;

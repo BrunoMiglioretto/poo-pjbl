@@ -1,11 +1,5 @@
 package app.contollers;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
-
 import java.util.ArrayList;
 
 import app.models.Produto;
@@ -44,7 +38,6 @@ public class ProdutoController {
     public Produto excluirProduto(int id) throws Exception{
         Produto produtoExcluido = null;
         for (Produto produto: produtos) {
-            
             if (produto.get_id() == id) {
                 produto.excluir();
                 produtoExcluido = produto;
