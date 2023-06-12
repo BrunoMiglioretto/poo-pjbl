@@ -39,7 +39,7 @@ public class JanelaNovoProduto extends Janela {
             String quantidade = inputQuantidade.getText();
 
             try {
-                produtoController.cadastrar_produto(
+                produtoController.cadastrarProduto(
                     nome,
                     Double.parseDouble(quantidade), 
                     Double.parseDouble(preco), 

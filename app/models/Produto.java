@@ -10,6 +10,7 @@ public class Produto {
     private double preco; // Preço unitário
     private String marca;
     private Date cadastrado_em;
+    private boolean esta_excluido = false;
 
     public Produto(int id, String nome, double quantidade, double preco, String marca) {
         this.id = id;
@@ -18,6 +19,14 @@ public class Produto {
         this.preco = preco;
         this.marca = marca;
         this.cadastrado_em = new Date();
+    }
+
+    public void excluir() {
+        esta_excluido = true;
+    }
+
+    public boolean excluido() {
+        return esta_excluido;
     }
 
     public int get_id() {

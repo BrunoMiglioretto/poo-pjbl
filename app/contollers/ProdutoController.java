@@ -12,7 +12,7 @@ public class ProdutoController {
         produtos = new ArrayList<Produto>(); 
     }
 
-    private int gerar_proximo_id() {
+    private int gerarProximoId() {
         int maior_id = 0;
         for (Produto produto: produtos) {
             if (produto.get_id() > maior_id)
@@ -22,11 +22,11 @@ public class ProdutoController {
         return maior_id + 1;
     }
    
-    public Produto cadastrar_produto(String nome, double quantidade, double preco, String marca) throws PrecoInvalidoException {
+    public Produto cadastrarProduto(String nome, double quantidade, double preco, String marca) throws PrecoInvalidoException {
         if (preco <= 0) 
             throw new PrecoInvalidoException("O preço não pode ser menor que 0.");
 
-        Produto produto = new Produto(gerar_proximo_id(), nome, quantidade, preco, marca);
+        Produto produto = new Produto(gerarProximoId(), nome, quantidade, preco, marca);
 
         produtos.add(produto);
 
@@ -34,22 +34,24 @@ public class ProdutoController {
     }
 
 
-    public Produto deletar_produto(int id) throws Exception{
-        Produto produto_removido = null;
+    public Produto excluirProduto(int id) throws Exception{
+        Produto produtoExcluido = null;
         for (Produto produto: produtos) {
+            
             if (produto.get_id() == id) {
-                boolean removido = produtos.remove(produto);
-                if (!removido) 
-                    throw new Exception("O produto não foi encontrado.", null); 
-                
-                    produto_removido = produto;
+                produto.excluir();
+                produtoExcluido = produto;
+                break;
             }
         }
+        if (produtoExcluido == null) {
+            throw new Exception("O produto não foi encontrado.", null); 
+        }
 
-        return produto_removido;
+        return produtoExcluido;
     }
 
-    public ArrayList<Produto> get_produtos() {
+    public ArrayList<Produto> getProdutos() {
         return produtos;
     }
 }
