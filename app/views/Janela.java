@@ -17,4 +17,5 @@ public abstract class Janela extends JFrame {
         dialog.setSize(500, 100);
         dialog.setVisible(true);
     }
+
 }

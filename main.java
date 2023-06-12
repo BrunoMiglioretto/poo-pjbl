@@ -3,13 +3,14 @@ import app.views.JanelaPrincipal;
 
 public class main {
     public static ProdutoController produtoController;    
+    public static JanelaPrincipal janelaPrincipal;
 
     public static void main(String[] args) {
         produtoController = new ProdutoController();        
 
-        JanelaPrincipal janela = new JanelaPrincipal(produtoController);
-        janela.setDefaultCloseOperation(JanelaPrincipal.EXIT_ON_CLOSE);
-        janela.setSize(1024, 768);
-        janela.setVisible(true);
+        janelaPrincipal = new JanelaPrincipal(produtoController);
+        janelaPrincipal.setDefaultCloseOperation(JanelaPrincipal.EXIT_ON_CLOSE);
+        janelaPrincipal.setSize(1024, 768);
+        janelaPrincipal.setVisible(true);
     }
 }

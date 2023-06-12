@@ -1,33 +1,22 @@
 package app.views;
 
-import java.awt.Dialog;
-import java.awt.Panel;
-import java.beans.Visibility;
-
 import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import app.contollers.ProdutoController;
-import app.models.Produto;
+import app.views.tab.ProdutoTab;
 import utils.PrecoInvalidoException;
 
-public class JanelaProduto extends Janela {
+public class JanelaNovoProduto extends Janela {
     ProdutoController produtoController;    
-    DefaultTableModel modeloTabelaProduto;
-    JPanel painel;
+    ProdutoTab produtoTab;
 
-    public JanelaProduto(ProdutoController produtoController, DefaultTableModel modeloTabelaProduto) {
+    public JanelaNovoProduto(ProdutoController produtoController, ProdutoTab produtoTab) {
         super("Novo produto");
-        this.modeloTabelaProduto = modeloTabelaProduto;
         this.produtoController = produtoController; 
+        this.produtoTab = produtoTab;
 
         this.setSize(500, 500);
 
@@ -56,13 +45,14 @@ public class JanelaProduto extends Janela {
                     Double.parseDouble(preco), 
                     marca
                 );
+                produtoTab.atualizar();
                 setVisible(false);
             } catch(PrecoInvalidoException error) {
                 mostrarAviso("Erro", error.getMessage());
             }
         });
 
-        painel = new JPanel();
+        JPanel painel = new JPanel();
 
         painel.add(labelNome);
         painel.add(inputNome);

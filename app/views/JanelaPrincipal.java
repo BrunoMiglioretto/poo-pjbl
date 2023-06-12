@@ -21,14 +21,12 @@ import javax.swing.table.DefaultTableModel;
 
 import app.contollers.ProdutoController;
 import app.models.Produto;
+import app.views.tab.ProdutoTab;
 
 
 public class JanelaPrincipal extends Janela {
 	private ProdutoController produtoController;	
-	private JTable TabelaProduto; 
-	private DefaultTableModel modeloTabelaProduto;
-	private JTable TabelaCarrinho; 
-	private JTable TabelaPagamento; 
+	private ProdutoTab produtoTab;
 
 	public JanelaPrincipal(ProdutoController produtoController) {
 		super("Sistema de Caixa");
@@ -44,7 +42,7 @@ public class JanelaPrincipal extends Janela {
 		JMenu produtoMenu = new JMenu("Produto");
 		menuBar.add(produtoMenu);
 		
-		JFrame janelaNovoProduto = new JanelaProduto(produtoController, modeloTabelaProduto);		
+		JFrame janelaNovoProduto = new JanelaNovoProduto(produtoController, produtoTab);		
 		JMenuItem novoProdutoMenu = new JMenuItem("Novo");
 		ActionListener abrirMenuNovoProduto = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -68,61 +66,19 @@ public class JanelaPrincipal extends Janela {
 	private void criarTabs() {
 		JTabbedPane tabbedPane = new JTabbedPane();
 		
-		JComponent tabProdutos = criarTabProdutos();
-		tabbedPane.addTab("Produtos", tabProdutos);
-		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
-		
-		JComponent tabCarrinhos = criarTabCarrinhos();
-		tabbedPane.addTab("Carrinhos", tabCarrinhos);
-		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
-		
+		produtoTab = construirTabProdutos();
+		tabbedPane.addTab("Produtos", produtoTab);
+		tabbedPane.addTab("Carrinhos", criarTabCarrinhos());
+
 		add(tabbedPane);
 		
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 	}
 
-	protected JComponent criarTabProdutos() {
-		JPanel panel = new JPanel(false);
-		JButton botaoRecarregar = new JButton("Recarregar");
-		botaoRecarregar.setSize(new Dimension(100, 30));
-		botaoRecarregar.addActionListener(e -> {
-			atualizarTabelaProdutos();
-		});		
-
-		
-		modeloTabelaProduto = new DefaultTableModel();
-        TabelaProduto = new JTable(modeloTabelaProduto);
-        modeloTabelaProduto.addColumn("Id");
-        modeloTabelaProduto.addColumn("Quantidade");
-        modeloTabelaProduto.addColumn("Preco");
-        modeloTabelaProduto.addColumn("Marca");
-        modeloTabelaProduto.addColumn("Data cadastro");
-
-		ArrayList<Produto> produtos = produtoController.get_produtos();
-		if (produtos.size() > 0) 
-			atualizarTabelaProdutos();
-
-		panel.add(botaoRecarregar);
-		panel.add(TabelaProduto);
-		panel.setLayout(new GridLayout(1, 1));
-		
-		return panel;
-	}
-
-	private void atualizarTabelaProdutos() {
-		ArrayList<Produto> produtos = produtoController.get_produtos();
-
-		modeloTabelaProduto.setRowCount(0);
-		for (int i = 0; i < produtos.size(); i++) {
-			Produto produto = produtos.get(i);
-		   modeloTabelaProduto.addRow(new Object[] { 
-			   Integer.toString(produto.get_id()),
-			   Double.toString(produto.get_quantidade()),
-			   Double.toString(produto.get_preco()),
-			   produto.get_marca(),
-			   produto.get_cadastrado_em()
-		   });
-	   }
+	protected ProdutoTab construirTabProdutos() {
+		DefaultTableModel modelo = new DefaultTableModel();
+        JTable tabela = new JTable(modelo);
+		return new ProdutoTab(tabela, modelo, produtoController);
 	}
 
 	protected JComponent criarTabCarrinhos() {
