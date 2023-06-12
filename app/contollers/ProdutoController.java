@@ -3,6 +3,7 @@ package app.contollers;
 import java.util.ArrayList;
 
 import app.models.Produto;
+import utils.PrecoInvalidoException;
 
 public class ProdutoController {
     private ArrayList<Produto> produtos;
@@ -21,7 +22,10 @@ public class ProdutoController {
         return maior_id + 1;
     }
    
-    public Produto cadastrar_produto(String nome, double quantidade, double preco, String marca) {
+    public Produto cadastrar_produto(String nome, double quantidade, double preco, String marca) throws PrecoInvalidoException {
+        if (preco <= 0) 
+            throw new PrecoInvalidoException("O preço não pode ser menor que 0.");
+
         Produto produto = new Produto(gerar_proximo_id(), nome, quantidade, preco, marca);
 
         produtos.add(produto);

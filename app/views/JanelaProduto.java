@@ -1,9 +1,11 @@
 package app.views;
 
+import java.awt.Dialog;
 import java.awt.Panel;
 import java.beans.Visibility;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,10 +17,12 @@ import javax.swing.table.TableModel;
 
 import app.contollers.ProdutoController;
 import app.models.Produto;
+import utils.PrecoInvalidoException;
 
 public class JanelaProduto extends JFrame {
     ProdutoController produtoController;    
     DefaultTableModel modeloTabelaProduto;
+    JPanel painel;
 
     public JanelaProduto(ProdutoController produtoController, DefaultTableModel modeloTabelaProduto) {
         super("Novo produto");
@@ -45,17 +49,20 @@ public class JanelaProduto extends JFrame {
             String preco = inputPreco.getText();
             String quantidade = inputQuantidade.getText();
 
-            produtoController.cadastrar_produto(
-                nome,
-                Double.parseDouble(quantidade), 
-                Double.parseDouble(preco), 
-                marca
-            );
-
-            setVisible(false);
+            try {
+                produtoController.cadastrar_produto(
+                    nome,
+                    Double.parseDouble(quantidade), 
+                    Double.parseDouble(preco), 
+                    marca
+                );
+                setVisible(false);
+            } catch(PrecoInvalidoException error) {
+                adicionarMensagem(error.getMessage());
+            }
         });
 
-        JPanel painel = new JPanel();
+        painel = new JPanel();
 
         painel.add(labelNome);
         painel.add(inputNome);
@@ -69,4 +76,12 @@ public class JanelaProduto extends JFrame {
 
         add(painel);
     } 
+
+    private void adicionarMensagem(String mensagem) { 
+        JDialog dialog = new JDialog(this, "Erro");
+        JLabel labelMensagem = new JLabel(mensagem);
+        dialog.add(labelMensagem);
+        dialog.setSize(500, 100);
+        dialog.setVisible(true);
+    }
 }

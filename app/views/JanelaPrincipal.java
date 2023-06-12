@@ -41,18 +41,10 @@ public class JanelaPrincipal extends JFrame {
 	private void criarMenu() {
 		JMenuBar menuBar = new JMenuBar();
 		
-		// Adiciona a barra de menu ao  frame
-		setJMenuBar(menuBar);
-		
-		// Define e adiciona dois menus drop down na barra de menus
 		JMenu produtoMenu = new JMenu("Produto");
-		JMenu carrinhoMenu = new JMenu("Carrinho");
 		menuBar.add(produtoMenu);
-		menuBar.add(carrinhoMenu);
 		
-		// Cria e adiciona um item simples para o menu
 		JFrame janelaNovoProduto = new JanelaProduto(produtoController, modeloTabelaProduto);		
-
 		JMenuItem novoProdutoMenu = new JMenuItem("Novo");
 		ActionListener abrirMenuNovoProduto = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -62,13 +54,15 @@ public class JanelaPrincipal extends JFrame {
 		novoProdutoMenu.addActionListener(abrirMenuNovoProduto);
 
 		JMenuItem removerAction = new JMenuItem("Remover");
-		
 		produtoMenu.add(novoProdutoMenu);
 		produtoMenu.add(removerAction);
 
 		JMenuItem novoCarrinhoAction = new JMenuItem("Novo");
-		
+		JMenu carrinhoMenu = new JMenu("Carrinho");
 		carrinhoMenu.add(novoCarrinhoAction);
+		menuBar.add(carrinhoMenu);
+
+		setJMenuBar(menuBar);
 	}
 
 	private void criarTabs() {
@@ -80,12 +74,7 @@ public class JanelaPrincipal extends JFrame {
 		
 		JComponent tabCarrinhos = criarTabCarrinhos();
 		tabbedPane.addTab("Carrinhos", tabCarrinhos);
-		tabbedPane.setMnemonicAt(1,  KeyEvent.VK_2);
-		
-		JComponent tagPagamentos = criarTabPagamentos();
-		tagPagamentos.setPreferredSize(new Dimension(410, 50));
-		tabbedPane.addTab("Pagamentos", tagPagamentos);
-		tabbedPane.setMnemonicAt(2,  KeyEvent.VK_3);
+		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
 		
 		add(tabbedPane);
 		
@@ -137,22 +126,6 @@ public class JanelaPrincipal extends JFrame {
 	}
 
 	protected JComponent criarTabCarrinhos() {
-		JPanel panel = new JPanel(false);
-		
-		Object [][] dados = {
-			{"Ana Monteiro", "48 9923-7898", "ana.monteiro@gmail.com"},
-			{"João da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
-			{"Pedro Cascaes", "48 9870-5634", "pedrinho@gmail.com"}
-		};
-
-		String [] colunas = {"Nome", "Telefone", "Email"};
-
-		JTable filler = new JTable(dados, colunas);
-		panel.setLayout(new GridLayout(1, 1));
-		panel.add(filler);
-		return panel;
-	}
-	protected JComponent criarTabPagamentos() {
 		JPanel panel = new JPanel(false);
 		
 		Object [][] dados = {
