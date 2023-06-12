@@ -1,15 +1,23 @@
 package app.contollers;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+
 import java.util.ArrayList;
 
 import app.models.Produto;
 import utils.PrecoInvalidoException;
+import utils.ProdutoBuilder;
 
 public class ProdutoController {
     private ArrayList<Produto> produtos;
 
     public ProdutoController() {
-        produtos = new ArrayList<Produto>(); 
+        ProdutoBuilder builder = new ProdutoBuilder("/home/bruno/puc/java/poo-pjbl/produtos.csv");
+        produtos = builder.run(); 
     }
 
     private int gerarProximoId() {
@@ -32,7 +40,6 @@ public class ProdutoController {
 
         return produto;
     }
-
 
     public Produto excluirProduto(int id) throws Exception{
         Produto produtoExcluido = null;
