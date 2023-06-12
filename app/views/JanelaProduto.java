@@ -19,7 +19,7 @@ import app.contollers.ProdutoController;
 import app.models.Produto;
 import utils.PrecoInvalidoException;
 
-public class JanelaProduto extends JFrame {
+public class JanelaProduto extends Janela {
     ProdutoController produtoController;    
     DefaultTableModel modeloTabelaProduto;
     JPanel painel;
@@ -58,7 +58,7 @@ public class JanelaProduto extends JFrame {
                 );
                 setVisible(false);
             } catch(PrecoInvalidoException error) {
-                adicionarMensagem(error.getMessage());
+                mostrarAviso("Erro", error.getMessage());
             }
         });
 
@@ -77,11 +77,4 @@ public class JanelaProduto extends JFrame {
         add(painel);
     } 
 
-    private void adicionarMensagem(String mensagem) { 
-        JDialog dialog = new JDialog(this, "Erro");
-        JLabel labelMensagem = new JLabel(mensagem);
-        dialog.add(labelMensagem);
-        dialog.setSize(500, 100);
-        dialog.setVisible(true);
-    }
 }

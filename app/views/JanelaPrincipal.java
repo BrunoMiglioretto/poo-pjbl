@@ -23,7 +23,7 @@ import app.contollers.ProdutoController;
 import app.models.Produto;
 
 
-public class JanelaPrincipal extends JFrame {
+public class JanelaPrincipal extends Janela {
 	private ProdutoController produtoController;	
 	private JTable TabelaProduto; 
 	private DefaultTableModel modeloTabelaProduto;
@@ -31,8 +31,8 @@ public class JanelaPrincipal extends JFrame {
 	private JTable TabelaPagamento; 
 
 	public JanelaPrincipal(ProdutoController produtoController) {
+		super("Sistema de Caixa");
 		this.produtoController = produtoController;
-		setTitle("Sistema de Caixa");
 				
 		criarTabs();	
 		criarMenu();
