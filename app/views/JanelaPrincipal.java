@@ -51,7 +51,7 @@ public class JanelaPrincipal extends JFrame {
 		menuBar.add(carrinhoMenu);
 		
 		// Cria e adiciona um item simples para o menu
-		JFrame janelaNovoProduto = new ProdutoJanela(produtoController, modeloTabelaProduto);		
+		JFrame janelaNovoProduto = new JanelaProduto(produtoController, modeloTabelaProduto);		
 
 		JMenuItem novoProdutoMenu = new JMenuItem("Novo");
 		ActionListener abrirMenuNovoProduto = new ActionListener() {
@@ -95,6 +95,7 @@ public class JanelaPrincipal extends JFrame {
 	protected JComponent criarTabProdutos() {
 		JPanel panel = new JPanel(false);
 		JButton botaoRecarregar = new JButton("Recarregar");
+		botaoRecarregar.setSize(new Dimension(100, 30));
 		botaoRecarregar.addActionListener(e -> {
 			atualizarTabelaProdutos();
 		});		

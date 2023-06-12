@@ -16,11 +16,11 @@ import javax.swing.table.TableModel;
 import app.contollers.ProdutoController;
 import app.models.Produto;
 
-public class ProdutoJanela extends JFrame {
+public class JanelaProduto extends JFrame {
     ProdutoController produtoController;    
     DefaultTableModel modeloTabelaProduto;
 
-    public ProdutoJanela(ProdutoController produtoController, DefaultTableModel modeloTabelaProduto) {
+    public JanelaProduto(ProdutoController produtoController, DefaultTableModel modeloTabelaProduto) {
         super("Novo produto");
         this.modeloTabelaProduto = modeloTabelaProduto;
         this.produtoController = produtoController; 
